@@ -9,6 +9,7 @@ import pylab as pl
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import linear_model
+from sklearn.metrics import r2_score
 
 """ Loads dataset and filters missing row """
 
@@ -35,8 +36,6 @@ model = linear_model.LinearRegression()
 weight = np.asanyarray(train[['weight']], dtype='float32')
 mpg = np.asanyarray(train[['mpg']], dtype='float32')
 model.fit(weight, mpg)
-r_sqr = model.score(weight, mpg)
-print(r_sqr)
 
 """ Plot line """
 
@@ -46,7 +45,13 @@ plt.xlabel('Weight')
 plt.ylabel('Miles per Galon (MPG)')
 plt.show()
 
+""" R² score """
+test_weight = np.asanyarray(test[['weight']])
+test_mpg = np.asanyarray(test[['mpg']])
+predict = model.predict(test_weight)
+print("R2-score: %.2f" % r2_score(test_mpg, predict))
+
 """ 
-    Conclusion: the model predicts with 70 % out of sample
+    Conclusion: the model predicts with 69 % out of sample
     accuracy mpg values based on car's weight
 """
