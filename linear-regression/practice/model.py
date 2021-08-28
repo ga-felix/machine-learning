@@ -11,6 +11,7 @@ import pandas as pd
 import pylab as pl
 import numpy as np
 from sklearn import linear_model
+from sklearn.metrics import r2_score
 
 # Loads the dataset into RAM
 df = pd.read_csv("FuelConsumption.csv")
@@ -66,3 +67,16 @@ training_set_y = np.asanyarray(training_set[["CO2EMISSIONS"]])
 regression.fit(training_set_x, training_set_y)
 print(regression.coef_)
 print(regression.intercept_)
+
+# Plotting line
+plt.scatter(training_set_x, training_set_y, color='blue')
+plt.plot(training_set_x, (regression.coef_[0][0] * training_set_x) + regression.intercept_[0], '-r')
+plt.xlabel('Engine size')
+plt.ylabel('CO2 Emission g / km')
+plt.show()
+
+# Checking accuracy levels
+testing_x = testing_set[["ENGINESIZE"]]
+testing_y = testing_set[["CO2EMISSIONS"]]
+prediction = regression.predict(testing_x)
+print('R2 Score: %.2f' % r2_score(testing_y, prediction))
