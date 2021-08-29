@@ -51,6 +51,10 @@ test_mpg = np.asanyarray(test[['mpg']])
 predict = model.predict(test_weight)
 print("R2-score: %.2f" % r2_score(test_mpg, predict))
 
+"""Mean square Error"""
+print("MSE: %.2f" % mean_squared_error(test_mpg, predict))
+
+
 """ 
     Conclusion: the model predicts with 69 % out of sample
     accuracy mpg values based on car's weight
