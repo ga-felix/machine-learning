@@ -10,7 +10,7 @@ import numpy as np
 from sklearn import preprocessing
 
 """ Reading the dataset """
-df = pd.read_csv('teleCust1000t')
+df = pd.read_csv('teleCust1000t.csv')
 print(df.describe())
 print(df['custcat'].value_counts())
 
